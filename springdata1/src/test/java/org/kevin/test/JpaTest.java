@@ -41,6 +41,7 @@ public class JpaTest {
         //关闭资源
         if (entityManager != null) {
             entityManager.close();
+
         }
 
     }
@@ -75,7 +76,7 @@ public class JpaTest {
     @Test
     public void testUpdate() {
 
-        //操作
+        //操作  JPA的修改操作，要求必须先查询，再修改
         Article article = entityManager.find(Article.class, 2);
         article.setAuthor("田文凯");
         entityManager.merge(article);
@@ -89,7 +90,7 @@ public class JpaTest {
     @Test
     public void testDelete() {
 
-        //操作
+        //操作 JPA的删除操作，要求必须先查询，再修改
         Article article = entityManager.find(Article.class, 2);
         entityManager.remove(article);
         System.out.println(article);
