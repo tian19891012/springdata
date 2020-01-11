@@ -10,6 +10,7 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>springdata1</module>
+    <module>01-sd-jpa</module>
   </modules>
 
   <name>springdatademo</name>
