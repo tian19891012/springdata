@@ -5,6 +5,9 @@ import com.kevin.domain.Article;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -70,6 +73,32 @@ public class SpringDataTest {
 
 
         arricleDao.save(article.get());
+
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void queryByPage(){
+        /**
+         * 处理分页条件
+         * page   当前是第几页  size 每页大小
+         */
+
+
+        Pageable pageable = PageRequest.of(3,10);
+        Page<Article> page = arricleDao.findAll(pageable);
+        // 总记录数   总页数  每页多少
+        System.out.println("总记录数："+page.getTotalElements());
+        System.out.println("总页数："+page.getTotalPages());
+        System.out.println("每页多少："+page.getSize());
+        //当前页的元素
+        List<Article> content = page.getContent();
+        for (Article article : content) {
+            System.out.println(article);
+        }
+
 
     }
 }
