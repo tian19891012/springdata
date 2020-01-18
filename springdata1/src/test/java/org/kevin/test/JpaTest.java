@@ -4,12 +4,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.kevin.model.Article;
+import org.kevin.model.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author kevin
@@ -20,6 +19,7 @@ public class JpaTest {
 
     String persistenceUnitName = "jpa01";
     EntityManagerFactory factory = null;
+    //默认开启一级缓存
     EntityManager entityManager = null;
     EntityTransaction transaction = null;
 
@@ -97,6 +97,32 @@ public class JpaTest {
 
         //提交事务
         transaction.commit();
+
+    }
+
+    @Test
+    public void testList(){
+
+        TypedQuery<User> query = entityManager.createQuery("select u FROM User u", User.class);
+        List<User> userList = query.getResultList();
+        System.out.println(userList);
+    }
+
+    @Test
+    public void findUserById(){
+
+        User user1 = entityManager.find(User.class, 1l);
+        User user2 = entityManager.find(User.class, 1l);
+        System.out.println(user1);
+        System.out.println(user2);
+
+    }
+
+    @Test
+    public void findUserById1(){
+
+        User reference = entityManager.getReference(User.class, 1l);
+        System.out.println(reference);
 
     }
 }

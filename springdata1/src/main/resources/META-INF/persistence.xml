@@ -13,7 +13,9 @@
         <!--配置JPA规范的服务提供商-->
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <!--指定实体类-->
-        <class>org.kevin.model.Article</class>
+        <!--<class>org.kevin.model.Article</class>-->
+        <class>org.kevin.model.User</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="avax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa?useUnicode=true&amp;characterEncoding=utf8"/>
@@ -25,8 +27,10 @@
             <property name="hibernate.format_sql" value="true"/>
             <!--
             自动建表
-            update   如果数据库存在数据表，就是用，不存在就创建
+            update   如果数据库存在数据表，就是用，不存在就创建（增加属性自动创建，删除属性不变化）
             create   不管数据库有没有数据表，每次sql请求都会重新建表
+            create-drop 同create,但是关闭系统的时候会删除表
+            validate  在启动的时候，检查实体类和表结构是否有变化，如果有则启动失败，抛出异常
             -->
             <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
